@@ -2,7 +2,12 @@ package com.technosdev.services;
 
 import com.technosdev.entities.Client;
 import com.technosdev.repositories.ClientRepository;
+import com.technosdev.services.exceptions.DatabaseException;
+import com.technosdev.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +24,7 @@ public class ClientService {
 
     public Client findById(Long id) {
         Optional<Client> client = clientRepository.findById(id);
-        return client.get();
+        return client.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Client insert(Client client) {
@@ -27,13 +32,23 @@ public class ClientService {
     }
 
     public void delete(Long id) {
-        clientRepository.deleteById(id);
+        try {
+            clientRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public Client update(Long id, Client client) {
-        Client entity = clientRepository.getReferenceById(id);
-        updateData(entity, client);
-        return clientRepository.save(entity);
+        try {
+            Client entity = clientRepository.getReferenceById(id);
+            updateData(entity, client);
+            return clientRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Client entity, Client client) {
