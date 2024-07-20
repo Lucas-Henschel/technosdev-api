@@ -28,7 +28,7 @@ public class Client implements Serializable {
     private boolean active;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", updatable = false)
     private Date createdAt;
 
     public Client() {
@@ -89,6 +89,11 @@ public class Client implements Serializable {
 
     public void setNmrCpf(String nmrCpf) {
         this.nmrCpf = nmrCpf;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
     }
 
     @Override
