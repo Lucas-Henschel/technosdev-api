@@ -29,4 +29,17 @@ public class ClientService {
     public void delete(Long id) {
         clientRepository.deleteById(id);
     }
+
+    public Client update(Long id, Client client) {
+        Client entity = clientRepository.getReferenceById(id);
+        updateData(entity, client);
+        return clientRepository.save(entity);
+    }
+
+    private void updateData(Client entity, Client client) {
+        entity.setNmClient(client.getNmClient());
+        entity.setNmrPhone(client.getNmrPhone());
+        entity.setActive(client.isActive());
+        entity.setNmrCpf(client.getNmrCpf());
+    }
 }

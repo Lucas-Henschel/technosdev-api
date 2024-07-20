@@ -44,4 +44,10 @@ public class ClientResource {
         clientService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
+        client = clientService.update(id, client);
+        return ResponseEntity.ok().body(client);
+    }
 }
