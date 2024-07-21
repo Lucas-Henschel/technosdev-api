@@ -1,4 +1,4 @@
-package com.technosdev.resource;
+package com.technosdev.resources;
 
 import com.technosdev.entities.Client;
 import com.technosdev.services.ClientService;
@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientResource {
-
     @Autowired
     private ClientService clientService;
 

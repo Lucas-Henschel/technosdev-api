@@ -33,6 +33,7 @@ public class ClientService {
 
     public void delete(Long id) {
         try {
+            findById(id);
             clientRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);

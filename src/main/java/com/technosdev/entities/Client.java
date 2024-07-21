@@ -15,20 +15,20 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codClient;
 
-    @Column(name = "nm_client", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String nmClient;
 
-    @Column(name = "nmr_cpf", nullable = false, unique = true, length = 20)
+    @Column(nullable = false, unique = true, length = 20)
     private String nmrCpf;
 
-    @Column(name = "nmr_phone", nullable = false, length = 25)
+    @Column(nullable = false, length = 25)
     private String nmrPhone;
 
-    @Column(name = "active", nullable = false)
+    @Column(nullable = false)
     private boolean active;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", updatable = false)
+    @Column(updatable = false)
     private Date createdAt;
 
     public Client() {
