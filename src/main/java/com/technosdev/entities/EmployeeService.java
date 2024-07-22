@@ -16,7 +16,7 @@ public class EmployeeService implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "cod_employee")
+    @JoinColumn(name = "cod_empl")
     private Employee employee;
 
     public EmployeeService() {

@@ -15,7 +15,7 @@ public class Address implements Serializable {
     private Long codAddress;
 
     @ManyToOne
-    @JoinColumn(name = "cod_country")
+    @JoinColumn(name = "cod_muni", nullable = false)
     private County county;
 
     @Column(nullable = false, length = 50)
