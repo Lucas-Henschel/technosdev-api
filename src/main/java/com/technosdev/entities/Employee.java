@@ -13,13 +13,14 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codEmpl")
     private Long codEmpl;
 
-    @Column(nullable = false, length = 100)
-    private String nmEmpl;
+    @Column(nullable = false, length = 100 , name = "nmEmpl")
+    private String name;
 
-    @Column(nullable = false, length = 20)
-    private String cpfEmpl;
+    @Column(nullable = false, length = 20 , name = "cpfEmpl")
+    private String cpf;
 
     @Column(nullable = false)
     private boolean active;
@@ -38,8 +39,8 @@ public class Employee implements Serializable {
 
     public Employee(Long codEmpl, String nmEmpl, String cpfEmpl, boolean active, Date createdAt) {
         this.codEmpl = codEmpl;
-        this.nmEmpl = nmEmpl;
-        this.cpfEmpl = cpfEmpl;
+        this.name = nmEmpl;
+        this.cpf = cpfEmpl;
         this.active = active;
         this.createdAt = createdAt;
     }
@@ -52,20 +53,20 @@ public class Employee implements Serializable {
         this.codEmpl = codEmpl;
     }
 
-    public String getNmEmpl() {
-        return nmEmpl;
+    public String getName() {
+        return name;
     }
 
-    public void setNmEmpl(String nmEmpl) {
-        this.nmEmpl = nmEmpl;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCpfEmpl() {
-        return cpfEmpl;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCpfEmpl(String cpfEmpl) {
-        this.cpfEmpl = cpfEmpl;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public boolean isActive() {

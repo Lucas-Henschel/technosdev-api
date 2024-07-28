@@ -53,9 +53,9 @@ public class ClientService {
     }
 
     private void updateData(Client entity, Client client) {
-        entity.setNmClient(client.getNmClient());
-        entity.setNmrPhone(client.getNmrPhone());
+        entity.setName(client.getName());
+        entity.setName(client.getName());
         entity.setActive(client.isActive());
-        entity.setNmrCpf(client.getNmrCpf());
+        entity.setCpf(client.getCpf());
     }
 }

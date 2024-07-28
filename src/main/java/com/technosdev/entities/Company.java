@@ -13,31 +13,32 @@ public class Company implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codCompany;
+    @Column(name = "codCompany")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_address")
     private Address address;
 
-    @Column(nullable = false, length = 100)
-    private String nmCompany;
+    @Column(nullable = false, length = 100 , name = "nmCompany")
+    private String name;
 
-    @Column(nullable = false, length = 30)
-    private String nmrCnpj;
+    @Column(nullable = false, length = 30 , name = "nmrCnpj")
+    private String cnpj;
 
-    @Column(nullable = false, length = 50)
-    private String nmEmail;
+    @Column(nullable = false, length = 50 , name = "nmEmail")
+    private String email;
 
-    @Column(nullable = false, length = 20)
-    private String nmrPhone;
+    @Column(nullable = false, length = 20 , name = "nmrPhone")
+    private String phone;
 
-    @Column(nullable = false, length = 100)
-    private String companyUser;
+    @Column(nullable = false, length = 100 , name = "companyUser")
+    private String user;
 
-    @Column(nullable = false, length = 1000)
-    private String companyPassword;
+    @Column(nullable = false, length = 1000 , name = "companyPassword")
+    private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false , name = "active")
     private boolean active;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -48,24 +49,24 @@ public class Company implements Serializable {
     }
 
     public Company(Long codCompany, Address address, String nmCompany, String nmrCnpj, String nmEmail, String nmrPhone, String companyUser, String companyPassword, boolean active, Date createdAt) {
-        this.codCompany = codCompany;
+        this.id = codCompany;
         this.address = address;
-        this.nmCompany = nmCompany;
-        this.nmrCnpj = nmrCnpj;
-        this.nmEmail = nmEmail;
-        this.nmrPhone = nmrPhone;
-        this.companyUser = companyUser;
-        this.companyPassword = companyPassword;
+        this.name = nmCompany;
+        this.cnpj = nmrCnpj;
+        this.email = nmEmail;
+        this.phone = nmrPhone;
+        this.user = companyUser;
+        this.password = companyPassword;
         this.active = active;
         this.createdAt = createdAt;
     }
 
-    public Long getCodCompany() {
-        return codCompany;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodCompany(Long codCompany) {
-        this.codCompany = codCompany;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Address getAddress() {
@@ -76,60 +77,52 @@ public class Company implements Serializable {
         this.address = address;
     }
 
-    public String getNmCompany() {
-        return nmCompany;
+    public String getName() {
+        return name;
     }
 
-    public void setNmCompany(String nmCompany) {
-        this.nmCompany = nmCompany;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNmrCnpj() {
-        return nmrCnpj;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setNmrCnpj(String nmrCnpj) {
-        this.nmrCnpj = nmrCnpj;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public String getNmEmail() {
-        return nmEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNmEmail(String nmEmail) {
-        this.nmEmail = nmEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getNmrPhone() {
-        return nmrPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNmrPhone(String nmrPhone) {
-        this.nmrPhone = nmrPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCompanyUser() {
-        return companyUser;
+    public String getUser() {
+        return user;
     }
 
-    public void setCompanyUser(String companyUser) {
-        this.companyUser = companyUser;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getCompanyPassword() {
-        return companyPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCompanyPassword(String companyPassword) {
-        this.companyPassword = companyPassword;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getCreatedAt() {
@@ -138,6 +131,14 @@ public class Company implements Serializable {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @PrePersist
@@ -150,11 +151,11 @@ public class Company implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Company company = (Company) o;
-        return Objects.equals(codCompany, company.codCompany);
+        return Objects.equals(id, company.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codCompany);
+        return Objects.hashCode(id);
     }
 }

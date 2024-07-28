@@ -12,45 +12,46 @@ public class County implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codMuni;
+    @Column(name = "codMuni")
+    private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String nmMuni;
+    @Column(nullable = false, length = 50 , name = "nmMuni")
+    private String name;
 
-    @Column(nullable = false, length = 2)
-    private String sgUf;
+    @Column(nullable = false, length = 2 , name = "sgUf")
+    private String uf;
 
     public County() {
     }
 
     public County(Long codMuni, String nmMuni, String sgUf) {
-        this.codMuni = codMuni;
-        this.nmMuni = nmMuni;
-        this.sgUf = sgUf;
+        this.id = codMuni;
+        this.name = nmMuni;
+        this.uf = sgUf;
     }
 
-    public Long getCodMuni() {
-        return codMuni;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodMuni(Long codMuni) {
-        this.codMuni = codMuni;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNmMuni() {
-        return nmMuni;
+    public String getName() {
+        return name;
     }
 
-    public void setNmMuni(String nmMuni) {
-        this.nmMuni = nmMuni;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSgUf() {
-        return sgUf;
+    public String getUf() {
+        return uf;
     }
 
-    public void setSgUf(String sgUf) {
-        this.sgUf = sgUf;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     @Override
@@ -58,11 +59,11 @@ public class County implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         County county = (County) o;
-        return Objects.equals(codMuni, county.codMuni);
+        return Objects.equals(id, county.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codMuni);
+        return Objects.hashCode(id);
     }
 }

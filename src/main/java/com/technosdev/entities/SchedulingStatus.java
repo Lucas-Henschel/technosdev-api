@@ -13,10 +13,11 @@ public class SchedulingStatus implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codSchedulingStatus;
+    @Column(name = "codSchedulingStatus")
+    private Long id;
 
-    @Column(nullable = false, length = 50)
-    private Integer nmStatus;
+    @Column(nullable = false, length = 50 , name = "nmStatus")
+    private Integer name;
 
     @Column(nullable = false)
     private boolean active;
@@ -29,26 +30,26 @@ public class SchedulingStatus implements Serializable {
     }
 
     public SchedulingStatus(Long codSchedulingStatus, Integer nmStatus, boolean active, Date createdAt) {
-        this.codSchedulingStatus = codSchedulingStatus;
-        this.nmStatus = nmStatus;
+        this.id = codSchedulingStatus;
+        this.name = nmStatus;
         this.active = active;
         this.createdAt = createdAt;
     }
 
-    public Long getCodSchedulingStatus() {
-        return codSchedulingStatus;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodSchedulingStatus(Long codSchedulingStatus) {
-        this.codSchedulingStatus = codSchedulingStatus;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Integer getNmStatus() {
-        return nmStatus;
+    public Integer getName() {
+        return name;
     }
 
-    public void setNmStatus(Integer nmStatus) {
-        this.nmStatus = nmStatus;
+    public void setName(Integer name) {
+        this.name = name;
     }
 
     public boolean isActive() {
@@ -77,11 +78,11 @@ public class SchedulingStatus implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SchedulingStatus that = (SchedulingStatus) o;
-        return Objects.equals(codSchedulingStatus, that.codSchedulingStatus);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codSchedulingStatus);
+        return Objects.hashCode(id);
     }
 }

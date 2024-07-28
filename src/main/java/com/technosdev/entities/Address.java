@@ -12,20 +12,21 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codAddress;
+    @Column(name = "codAddress")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_muni", nullable = false)
     private County county;
 
-    @Column(nullable = false, length = 50)
-    private String nmPublicPlace;
+    @Column(nullable = false, length = 50 , name = "nmPublicPlace")
+    private String publicPlace;
 
-    @Column(nullable = false, length = 50)
-    private String nmLocality;
+    @Column(nullable = false, length = 50, name = "nmLocality")
+    private String locality;
 
-    @Column(nullable = false, length = 8)
-    private String nmCep;
+    @Column(nullable = false, length = 8 , name = "nmCep")
+    private String cep;
 
     @Column(nullable = false, length = 100)
     private String dsComplement;
@@ -34,20 +35,20 @@ public class Address implements Serializable {
     }
 
     public Address(Long codAddress, County county, String nmPublicPlace, String nmLocality, String nmCep, String dsComplement) {
-        this.codAddress = codAddress;
+        this.id = codAddress;
         this.county = county;
-        this.nmPublicPlace = nmPublicPlace;
-        this.nmLocality = nmLocality;
-        this.nmCep = nmCep;
+        this.publicPlace = nmPublicPlace;
+        this.locality = nmLocality;
+        this.cep = nmCep;
         this.dsComplement = dsComplement;
     }
 
-    public Long getCodAddress() {
-        return codAddress;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodAddress(Long codAddress) {
-        this.codAddress = codAddress;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public County getCounty() {
@@ -58,28 +59,28 @@ public class Address implements Serializable {
         this.county = county;
     }
 
-    public String getNmPublicPlace() {
-        return nmPublicPlace;
+    public String getLocality() {
+        return locality;
     }
 
-    public void setNmPublicPlace(String nmPublicPlace) {
-        this.nmPublicPlace = nmPublicPlace;
+    public void setLocality(String locality) {
+        this.locality = locality;
     }
 
-    public String getNmLocality() {
-        return nmLocality;
+    public String getPublicPlace() {
+        return publicPlace;
     }
 
-    public void setNmLocality(String nmLocality) {
-        this.nmLocality = nmLocality;
+    public void setPublicPlace(String publicPlace) {
+        this.publicPlace = publicPlace;
     }
 
-    public String getNmCep() {
-        return nmCep;
+    public String getCep() {
+        return cep;
     }
 
-    public void setNmCep(String nmCep) {
-        this.nmCep = nmCep;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getDsComplement() {
@@ -95,11 +96,11 @@ public class Address implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(codAddress, address.codAddress);
+        return Objects.equals(id, address.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codAddress);
+        return Objects.hashCode(id);
     }
 }
