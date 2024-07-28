@@ -13,16 +13,17 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codClient;
+    @Column(name = "codClient")
+    private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String nmClient;
+    @Column(nullable = false, length = 100 , name = "nmClient")
+    private String name;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private String nmrCpf;
+    @Column(nullable = false, unique = true, length = 20 , name = "nmrCpf")
+    private String cpf;
 
-    @Column(nullable = false, length = 25)
-    private String nmrPhone;
+    @Column(nullable = false, length = 25 , name = "nmrPhone")
+    private String phone;
 
     @Column(nullable = false)
     private boolean active;
@@ -35,44 +36,36 @@ public class Client implements Serializable {
     }
 
     public Client(Long codClient, String nmClient, String nmrPhone, boolean active, String nmrCpf, Date createdAt) {
-        this.codClient = codClient;
-        this.nmClient = nmClient;
-        this.nmrPhone = nmrPhone;
+        this.id = codClient;
+        this.name = nmClient;
+        this.phone = nmrPhone;
         this.active = active;
-        this.nmrCpf = nmrCpf;
+        this.cpf = nmrCpf;
         this.createdAt = createdAt;
     }
 
-    public Long getCodClient() {
-        return codClient;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodClient(Long codClient) {
-        this.codClient = codClient;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNmClient() {
-        return nmClient;
+    public String getName() {
+        return name;
     }
 
-    public void setNmClient(String nmClient) {
-        this.nmClient = nmClient;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNmrPhone() {
-        return nmrPhone;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setNmrPhone(String nmrPhone) {
-        this.nmrPhone = nmrPhone;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public boolean isActive() {
@@ -83,12 +76,20 @@ public class Client implements Serializable {
         this.active = active;
     }
 
-    public String getNmrCpf() {
-        return nmrCpf;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNmrCpf(String nmrCpf) {
-        this.nmrCpf = nmrCpf;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @PrePersist
@@ -101,11 +102,11 @@ public class Client implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(codClient, client.codClient);
+        return Objects.equals(id, client.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codClient);
+        return Objects.hashCode(id);
     }
 }

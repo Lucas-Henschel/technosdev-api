@@ -13,23 +13,24 @@ public class Service implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codService;
+    @Column(name = "codService")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_company")
     private Company company;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100 , name = "nmService")
     private String nmService;
 
-    @Column(nullable = false, length = 200)
-    private String dsService;
+    @Column(nullable = false, length = 200 , name = "dsService")
+    private String description;
 
-    @Column(nullable = false)
-    private Double prcService;
+    @Column(nullable = false , name = "prcService")
+    private Double price;
 
-    @Column(updatable = false)
-    private Date averageTi;
+    @Column(updatable = false , name = "averageTi")
+    private Date averageTime;
 
     @Column(nullable = false)
     private boolean active;
@@ -47,22 +48,30 @@ public class Service implements Serializable {
     }
 
     public Service(Long codService, Long codCompany, Company company, String nmService, String dsService, Double prcService, Date averageTi, boolean active, Date createdAt) {
-        this.codService = codService;
+        this.id = codService;
         this.company = company;
         this.nmService = nmService;
-        this.dsService = dsService;
-        this.prcService = prcService;
-        this.averageTi = averageTi;
+        this.description = dsService;
+        this.price = prcService;
+        this.averageTime = averageTi;
         this.active = active;
         this.createdAt = createdAt;
     }
 
     public Long getCodService() {
-        return codService;
+        return id;
     }
 
     public void setCodService(Long codService) {
-        this.codService = codService;
+        this.id = codService;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Company getCompany() {
@@ -81,28 +90,28 @@ public class Service implements Serializable {
         this.nmService = nmService;
     }
 
-    public String getDsService() {
-        return dsService;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDsService(String dsService) {
-        this.dsService = dsService;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double getPrcService() {
-        return prcService;
+    public Date getAverageTime() {
+        return averageTime;
     }
 
-    public void setPrcService(Double prcService) {
-        this.prcService = prcService;
+    public void setAverageTime(Date averageTime) {
+        this.averageTime = averageTime;
     }
 
-    public Date getAverageTi() {
-        return averageTi;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setAverageTi(Date averageTi) {
-        this.averageTi = averageTi;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public boolean isActive() {
@@ -126,11 +135,11 @@ public class Service implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return Objects.equals(codService, service.codService);
+        return Objects.equals(id, service.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codService);
+        return Objects.hashCode(id);
     }
 }

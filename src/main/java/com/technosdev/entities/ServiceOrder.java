@@ -13,7 +13,8 @@ public class ServiceOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codServiceOrder;
+    @Column(name = "codServiceOrder")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_scheduling")
@@ -23,7 +24,7 @@ public class ServiceOrder implements Serializable {
     @JoinColumn(name = "cod_service")
     private Service service;
 
-    @Column(nullable = false)
+    @Column(nullable = false , name = "priceOrderService")
     private Double priceOrderService;
 
     @Column(updatable = false)
@@ -42,7 +43,7 @@ public class ServiceOrder implements Serializable {
     }
 
     public ServiceOrder(Long codServiceOrder, Scheduling scheduling, Service service, Double priceOrderService, Date finishedAt, Date createdAt) {
-        this.codServiceOrder = codServiceOrder;
+        this.id = codServiceOrder;
         this.scheduling = scheduling;
         this.service = service;
         this.priceOrderService = priceOrderService;
@@ -50,12 +51,12 @@ public class ServiceOrder implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Long getCodServiceOrder() {
-        return codServiceOrder;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodServiceOrder(Long codServiceOrder) {
-        this.codServiceOrder = codServiceOrder;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Scheduling getScheduling() {
@@ -103,11 +104,11 @@ public class ServiceOrder implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ServiceOrder that = (ServiceOrder) o;
-        return Objects.equals(codServiceOrder, that.codServiceOrder);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codServiceOrder);
+        return Objects.hashCode(id);
     }
 }

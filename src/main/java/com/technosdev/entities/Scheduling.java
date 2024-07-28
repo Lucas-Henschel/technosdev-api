@@ -12,7 +12,8 @@ public class Scheduling implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codScheduling;
+    @Column(name = "codScheduling")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_client")
@@ -30,18 +31,18 @@ public class Scheduling implements Serializable {
     }
 
     public Scheduling(Long codScheduling, Client client, SchedulingStatus schedulingStatus, Company company) {
-        this.codScheduling = codScheduling;
+        this.id = codScheduling;
         this.client = client;
         this.schedulingStatus = schedulingStatus;
         this.company = company;
     }
 
-    public Long getCodScheduling() {
-        return codScheduling;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodScheduling(Long codScheduling) {
-        this.codScheduling = codScheduling;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Client getClient() {
@@ -73,11 +74,11 @@ public class Scheduling implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scheduling that = (Scheduling) o;
-        return Objects.equals(codScheduling, that.codScheduling);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codScheduling);
+        return Objects.hashCode(id);
     }
 }

@@ -33,7 +33,7 @@ public class ClientResource {
         client = clientService.insert(client);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(client.getCodClient()).toUri();
+                .buildAndExpand(client.getId()).toUri();
 
         return ResponseEntity.created(uri).body(client);
     }
