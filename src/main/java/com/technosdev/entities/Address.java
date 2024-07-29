@@ -17,7 +17,7 @@ public class Address implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "cod_muni", nullable = false)
-    private County county;
+    private City city;
 
     @Column(nullable = false, length = 50 , name = "nmPublicPlace")
     private String publicPlace;
@@ -28,19 +28,19 @@ public class Address implements Serializable {
     @Column(nullable = false, length = 8 , name = "nmCep")
     private String cep;
 
-    @Column(nullable = false, length = 100)
-    private String dsComplement;
+    @Column(nullable = false, length = 100 , name = "dsComplement")
+    private String complement;
 
     public Address() {
     }
 
-    public Address(Long codAddress, County county, String nmPublicPlace, String nmLocality, String nmCep, String dsComplement) {
+    public Address(Long codAddress, City city, String nmPublicPlace, String nmLocality, String nmCep, String dsComplement) {
         this.id = codAddress;
-        this.county = county;
+        this.city = city;
         this.publicPlace = nmPublicPlace;
         this.locality = nmLocality;
         this.cep = nmCep;
-        this.dsComplement = dsComplement;
+        this.complement = dsComplement;
     }
 
     public Long getId() {
@@ -51,12 +51,12 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public County getCounty() {
-        return county;
+    public City getCity() {
+        return city;
     }
 
-    public void setCounty(County county) {
-        this.county = county;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getLocality() {
@@ -83,12 +83,12 @@ public class Address implements Serializable {
         this.cep = cep;
     }
 
-    public String getDsComplement() {
-        return dsComplement;
+    public String getComplement() {
+        return complement;
     }
 
-    public void setDsComplement(String dsComplement) {
-        this.dsComplement = dsComplement;
+    public void setComplement(String complement) {
+        this.complement = complement;
     }
 
     @Override

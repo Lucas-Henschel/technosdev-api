@@ -1,6 +1,6 @@
 package com.technosdev.resources;
 
-import com.technosdev.entities.County;
+import com.technosdev.entities.City;
 import com.technosdev.services.CountyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class CountyResource {
     private CountyService countyService;
 
     @GetMapping
-    public ResponseEntity<List<County>> findAll() {
-        List<County> counties = countyService.findAll();
+    public ResponseEntity<List<City>> findAll() {
+        List<City> counties = countyService.findAll();
         return ResponseEntity.ok().body(counties);
     }
 

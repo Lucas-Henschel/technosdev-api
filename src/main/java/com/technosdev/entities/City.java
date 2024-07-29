@@ -7,27 +7,27 @@ import java.util.Objects;
 
 @Entity
 @Table
-public class County implements Serializable {
+public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codMuni")
+    @Column(name = "codCity")
     private Long id;
 
-    @Column(nullable = false, length = 50 , name = "nmMuni")
+    @Column(nullable = false, length = 50 , name = "nmCity")
     private String name;
 
-    @Column(nullable = false, length = 2 , name = "sgUf")
+    @Column(nullable = false, length = 2 , name = "sg_uf")
     private String uf;
 
-    public County() {
+    public City() {
     }
 
-    public County(Long codMuni, String nmMuni, String sgUf) {
-        this.id = codMuni;
-        this.name = nmMuni;
-        this.uf = sgUf;
+    public City(Long codCity, String nmCity, String uf) {
+        this.id = codCity;
+        this.name = nmCity;
+        this.uf = uf;
     }
 
     public Long getId() {
@@ -58,8 +58,8 @@ public class County implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        County county = (County) o;
-        return Objects.equals(id, county.id);
+        City city = (City) o;
+        return Objects.equals(id, city.id);
     }
 
     @Override
