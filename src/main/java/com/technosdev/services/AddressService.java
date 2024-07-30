@@ -25,7 +25,7 @@ public class AddressService {
 
     public Address findById(Long id) {
         Optional<Address> address = addressRepository.findById(id);
-        return address.orElseThrow(() -> new ResourceNotFoundException(id));
+        return address.orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado"));
     }
 
     public Address insert(Address address){
@@ -37,7 +37,7 @@ public class AddressService {
             findById(id);
             addressRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Endereço não encontrado");
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -49,7 +49,7 @@ public class AddressService {
             updateData(entity, address);
             return addressRepository.save(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Endereço não encontrado");
         }
     }
 

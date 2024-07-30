@@ -24,10 +24,11 @@ public class ClientService {
 
     public Client findById(Long id) {
         Optional<Client> client = clientRepository.findById(id);
-        return client.orElseThrow(() -> new ResourceNotFoundException(id));
+        return client.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
     }
 
     public Client insert(Client client) {
+        client.setActive(true);
         return clientRepository.save(client);
     }
 
@@ -36,7 +37,7 @@ public class ClientService {
             findById(id);
             clientRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Cliente não encontrado");
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -48,7 +49,7 @@ public class ClientService {
             updateData(entity, client);
             return clientRepository.save(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Cliente não encontrado");
         }
     }
 

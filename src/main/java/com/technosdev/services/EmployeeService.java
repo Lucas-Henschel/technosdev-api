@@ -20,7 +20,7 @@ public class EmployeeService {
 
     public Employee findById(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
-        return employee.orElseThrow(() -> new ResourceNotFoundException(id));
+        return employee.orElseThrow(() -> new ResourceNotFoundException("Colaborador não encontrado"));
     }
 
     public Employee insert(Employee employee){

@@ -24,7 +24,7 @@ public class CompanyService {
 
     public Company findById(Long id) {
         Optional<Company> address = companyRepository.findById(id);
-        return address.orElseThrow(() -> new ResourceNotFoundException(id));
+        return address.orElseThrow(() -> new ResourceNotFoundException("Empresa não encontrada"));
     }
 
     public Company insert(Company company){
@@ -36,7 +36,7 @@ public class CompanyService {
             findById(id);
             companyRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Empresa não encontrada");
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -48,7 +48,7 @@ public class CompanyService {
             updateData(entity, company , address);
             return companyRepository.save(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Empresa não encontrada");
         }
     }
 

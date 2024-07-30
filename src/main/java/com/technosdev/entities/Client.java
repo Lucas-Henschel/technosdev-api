@@ -1,6 +1,7 @@
 package com.technosdev.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -32,7 +33,6 @@ public class Client implements Serializable {
     private String cpf;
 
     @NotBlank(message = "O campo telefone é obrigatório")
-    @NumberFormat(pattern = "(##) #####-####")
     @Column(nullable = false, length = 25 , name = "nmrPhone")
     private String phone;
 
