@@ -141,6 +141,10 @@ public class Company implements Serializable {
         this.active = active;
     }
 
+    public boolean getActive() {
+        return this.active;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();

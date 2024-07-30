@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,10 +27,12 @@ public class Client implements Serializable {
     private String name;
 
     @NotBlank(message = "O campo CPF é obrigatório")
+    @CPF(message = "Formato de CPF inválido. Certifique-se de que o CPF esteja no formato correto e tente novamente")
     @Column(nullable = false, unique = true, length = 20 , name = "nmrCpf")
     private String cpf;
 
     @NotBlank(message = "O campo telefone é obrigatório")
+    @NumberFormat(pattern = "(##) #####-####")
     @Column(nullable = false, length = 25 , name = "nmrPhone")
     private String phone;
 

@@ -14,13 +14,25 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codEmpl")
-    private Long codEmpl;
+    private Long id;
 
     @Column(nullable = false, length = 100 , name = "nmEmpl")
     private String name;
 
     @Column(nullable = false, length = 20 , name = "cpfEmpl")
     private String cpf;
+
+    @Column(nullable = false, length = 20 , name = "nmrPhone")
+    private String phone;
+
+    @Column(nullable = false, length = 50 , name = "nmEmail")
+    private String email;
+
+    @Column(nullable = false, length = 100 , name = "companyUser")
+    private String user;
+
+    @Column(nullable = false, length = 1000 , name = "companyPassword")
+    private String password;
 
     @Column(nullable = false)
     private boolean active;
@@ -38,19 +50,19 @@ public class Employee implements Serializable {
     }
 
     public Employee(Long codEmpl, String nmEmpl, String cpfEmpl, boolean active, Date createdAt) {
-        this.codEmpl = codEmpl;
+        this.id = codEmpl;
         this.name = nmEmpl;
         this.cpf = cpfEmpl;
         this.active = active;
         this.createdAt = createdAt;
     }
 
-    public Long getCodEmpl() {
-        return codEmpl;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodEmpl(Long codEmpl) {
-        this.codEmpl = codEmpl;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -90,12 +102,12 @@ public class Employee implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(codEmpl, employee.codEmpl);
+        return Objects.equals(id, employee.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(codEmpl);
+        return Objects.hashCode(id);
     }
 }
 
