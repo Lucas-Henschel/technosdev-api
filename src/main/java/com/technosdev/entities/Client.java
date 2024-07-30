@@ -1,6 +1,9 @@
 package com.technosdev.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,15 +19,20 @@ public class Client implements Serializable {
     @Column(name = "codClient")
     private Long id;
 
+    @NotBlank(message = "O campo nome é obrigatório")
+    @Size(min = 1, max = 100, message = "O nome tem que ter no máximo 100 caracteres")
     @Column(nullable = false, length = 100 , name = "nmClient")
     private String name;
 
+    @NotBlank(message = "O campo CPF é obrigatório")
     @Column(nullable = false, unique = true, length = 20 , name = "nmrCpf")
     private String cpf;
 
+    @NotBlank(message = "O campo telefone é obrigatório")
     @Column(nullable = false, length = 25 , name = "nmrPhone")
     private String phone;
 
+    @NotNull(message = "O campo status é obrigatório")
     @Column(nullable = false)
     private boolean active;
 

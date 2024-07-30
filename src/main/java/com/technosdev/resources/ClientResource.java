@@ -2,6 +2,7 @@ package com.technosdev.resources;
 
 import com.technosdev.entities.Client;
 import com.technosdev.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class ClientResource {
     }
 
     @PostMapping
-    public ResponseEntity<Client> insert(@RequestBody Client client) {
+    public ResponseEntity<Client> insert(@Valid @RequestBody Client client) {
         client = clientService.insert(client);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
