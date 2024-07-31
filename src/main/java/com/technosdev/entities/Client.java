@@ -26,12 +26,12 @@ public class Client implements Serializable {
 
     @NotBlank(message = "O campo CPF é obrigatório")
     @CPF(message = "Formato de CPF inválido. Certifique-se de que o CPF esteja no formato correto e tente novamente")
-    @Column(nullable = false, unique = true, length = 20 , name = "nmrCpf")
+    @Column(nullable = false, unique = true, length = 20 , name = "nmr_cpf")
     private String cpf;
 
     @NotBlank(message = "O campo telefone é obrigatório")
     @Size(min = 11 , max = 11 , message = "Número de telefone mal formatado. Verifique o formato e tente novamente.")
-    @Column(nullable = false, length = 11 , name = "nmrPhone")
+    @Column(nullable = false, length = 11 , name = "nmr_phone")
     private String phone;
 
     @Column(nullable = false)

@@ -99,7 +99,7 @@ public class Employee implements Serializable {
         this.cpf = cpf;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
 

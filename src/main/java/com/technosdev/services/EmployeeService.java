@@ -4,6 +4,8 @@ import com.technosdev.entities.Employee;
 import com.technosdev.repositories.EmployeeRepository;
 import com.technosdev.services.exceptions.DatabaseException;
 import com.technosdev.services.exceptions.ResourceNotFoundException;
+import com.technosdev.services.exceptions.UnprocessableEntityException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,6 +29,11 @@ public class EmployeeService {
     }
 
     public Employee insert(Employee employee){
+
+        if (employeeRepository.findByCpf(employee.getCpf()).isPresent()){
+            throw new UnprocessableEntityException("Cpf não é válido");
+        }
+
         return employeeRepository.save(employee);
     }
 
@@ -39,6 +46,26 @@ public class EmployeeService {
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    public Employee update(Long id, Employee employee) {
+        try {
+            Employee entity = employeeRepository.getReferenceById(id);
+            updateData(entity, employee);
+            return employeeRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Empresa não encontrada");
+        }
+    }
+
+    private void updateData(Employee entity, Employee employee) {
+        entity.setName(employee.getName());
+        entity.setCpf(employee.getCpf());
+        entity.setPhone(employee.getPhone());
+        entity.setEmail(employee.getEmail());
+        entity.setUser(employee.getUser());
+        entity.setPassword(employee.getPassword());
+        entity.setActive(employee.getActive());
     }
 
 

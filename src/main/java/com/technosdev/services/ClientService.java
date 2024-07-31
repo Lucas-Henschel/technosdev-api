@@ -3,7 +3,9 @@ package com.technosdev.services;
 import com.technosdev.entities.Client;
 import com.technosdev.repositories.ClientRepository;
 import com.technosdev.services.exceptions.DatabaseException;
+import com.technosdev.services.exceptions.ResourceAlreadyExistsException;
 import com.technosdev.services.exceptions.ResourceNotFoundException;
+import com.technosdev.services.exceptions.UnprocessableEntityException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,6 +30,11 @@ public class ClientService {
     }
 
     public Client insert(Client client) {
+
+        if (clientRepository.findByCpf(client.getCpf()).isPresent()){
+            throw new UnprocessableEntityException("Cpf não é válido");
+        }
+
         client.setActive(true);
         return clientRepository.save(client);
     }

@@ -3,6 +3,7 @@ package com.technosdev.resources.exceptions;
 import com.technosdev.services.exceptions.DatabaseException;
 import com.technosdev.services.exceptions.ResourceNotFoundException;
 
+import com.technosdev.services.exceptions.UnprocessableEntityException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,16 @@ public class ResourceExceptionHandler {
 			String errorMessage = error.getDefaultMessage();
 			errors.add(errorMessage);
 		});
+
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		StandardError err = new StandardError(Instant.now(), status.value(), errors, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(UnprocessableEntityException.class)
+	public ResponseEntity<StandardError> handleUnprocessableEntityExceptions(UnprocessableEntityException e, HttpServletRequest request) {
+		List<String> errors = new ArrayList<>();
+		errors.add(e.getMessage());
 
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		StandardError err = new StandardError(Instant.now(), status.value(), errors, e.getMessage(), request.getRequestURI());
