@@ -4,6 +4,7 @@ import com.technosdev.entities.Address;
 import com.technosdev.entities.Company;
 import com.technosdev.services.AddressService;
 import com.technosdev.services.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class CompanyResource {
     }
 
     @PostMapping
-    public ResponseEntity<Company> insert(@RequestBody Company company){
+    public ResponseEntity<Company> insert(@Valid @RequestBody Company company){
         company.setActive(true);
         company = companyService.insert(company);
 
@@ -39,13 +40,13 @@ public class CompanyResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         companyService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Company> update(@PathVariable Long id, @RequestBody Company company) {
+    public ResponseEntity<Company> update(@Valid @PathVariable Long id, @Valid @RequestBody Company company) {
         Address address = addressService.update(company.getAddress().getId() , company.getAddress());
         company = companyService.update(id, company , address);
         return ResponseEntity.ok().body(company);

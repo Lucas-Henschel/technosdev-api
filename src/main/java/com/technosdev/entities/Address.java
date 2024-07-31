@@ -1,6 +1,7 @@
 package com.technosdev.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,12 +20,15 @@ public class Address implements Serializable {
     @JoinColumn(name = "cod_muni", nullable = false)
     private City city;
 
+    @NotBlank(message = "O campo logradouro é obrigatório")
     @Column(nullable = false, length = 50 , name = "nmPublicPlace")
     private String publicPlace;
 
     @Column(nullable = false, length = 50, name = "nmLocality")
+    @NotBlank(message = "O campo bairro é obrigatório")
     private String locality;
 
+    @NotBlank(message = "O campo cep é obrigatório")
     @Column(nullable = false, length = 8 , name = "nmCep")
     private String cep;
 

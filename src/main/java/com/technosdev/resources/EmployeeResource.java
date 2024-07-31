@@ -2,6 +2,7 @@ package com.technosdev.resources;
 
 import com.technosdev.entities.Employee;
 import com.technosdev.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +24,28 @@ public class EmployeeResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Employee> findById(@PathVariable Long id) {
+    public ResponseEntity<Employee> findById(@Valid @PathVariable Long id) {
         Employee employee = employeeService.findById(id);
         return ResponseEntity.ok().body(employee);
     }
 
     @PostMapping
-    public ResponseEntity<Employee> insert(@RequestBody Employee employee){
+    public ResponseEntity<Employee> insert(@Valid @RequestBody Employee employee){
+
+        employee.setActive(true);
+
         employee = employeeService.insert(employee);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(employee.getId()).toUri();
 
         return ResponseEntity.created(uri).body(employee);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
+        employeeService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

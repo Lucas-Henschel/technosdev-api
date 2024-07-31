@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/county")
 public class CityResource {
+
     @Autowired
     private CityService cityService;
 

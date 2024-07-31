@@ -1,6 +1,9 @@
 package com.technosdev.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,21 +23,29 @@ public class Company implements Serializable {
     @JoinColumn(name = "cod_address")
     private Address address;
 
+    @NotBlank(message = "O campo nome é obrigatório")
     @Column(nullable = false, length = 100 , name = "nmCompany")
     private String name;
 
+    @NotBlank(message = "O campo cnpj é obrigatório")
     @Column(nullable = false, length = 30 , name = "nmrCnpj")
     private String cnpj;
 
+    @NotBlank(message = "O campo email é obrigatório")
     @Column(nullable = false, length = 50 , name = "nmEmail")
+    @Email(message = "E-mail mal formatado. Exemplo de formato correto: exemplo@gmail.com.")
     private String email;
 
+    @NotBlank(message = "O campo telefone é obrigatório")
+    @Size(min = 11 , max = 11 , message = "Número de telefone mal formatado. Verifique o formato e tente novamente.")
     @Column(nullable = false, length = 20 , name = "nmrPhone")
     private String phone;
 
+    @NotBlank(message = "O usuário telefone é obrigatório")
     @Column(nullable = false, length = 100 , name = "companyUser")
     private String user;
 
+    @NotBlank(message = "O campo senha é obrigatório")
     @Column(nullable = false, length = 1000 , name = "companyPassword")
     private String password;
 

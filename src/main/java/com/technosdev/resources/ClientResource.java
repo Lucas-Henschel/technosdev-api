@@ -24,7 +24,7 @@ public class ClientResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Client> findById(@PathVariable Long id) {
+    public ResponseEntity<Client> findById(@Valid @PathVariable Long id) {
         Client client = clientService.findById(id);
         return ResponseEntity.ok().body(client);
     }
@@ -40,13 +40,13 @@ public class ClientResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         clientService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
+    public ResponseEntity<Client> update(@Valid @PathVariable Long id, @Valid @RequestBody Client client) {
         client = clientService.update(id, client);
         return ResponseEntity.ok().body(client);
     }
