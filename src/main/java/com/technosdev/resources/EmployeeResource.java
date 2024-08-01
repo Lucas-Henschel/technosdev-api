@@ -1,5 +1,7 @@
 package com.technosdev.resources;
 
+import com.technosdev.entities.Address;
+import com.technosdev.entities.Company;
 import com.technosdev.entities.Employee;
 import com.technosdev.services.EmployeeService;
 import jakarta.validation.Valid;
@@ -33,9 +35,7 @@ public class EmployeeResource {
     public ResponseEntity<Employee> insert(@Valid @RequestBody Employee employee){
 
         employee.setActive(true);
-
         employee = employeeService.insert(employee);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(employee.getId()).toUri();
 
@@ -46,6 +46,12 @@ public class EmployeeResource {
     public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Employee> update(@Valid @PathVariable Long id, @Valid @RequestBody Employee employee) {
+        employee = employeeService.update(id, employee);
+        return ResponseEntity.ok().body(employee);
     }
 
 }

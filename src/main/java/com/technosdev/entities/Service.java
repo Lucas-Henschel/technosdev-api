@@ -21,7 +21,7 @@ public class Service implements Serializable {
     private Company company;
 
     @Column(nullable = false, length = 100 , name = "nmService")
-    private String nmService;
+    private String name;
 
     @Column(nullable = false, length = 200 , name = "dsService")
     private String description;
@@ -50,7 +50,7 @@ public class Service implements Serializable {
     public Service(Long codService, Long codCompany, Company company, String nmService, String dsService, Double prcService, Date averageTi, boolean active, Date createdAt) {
         this.id = codService;
         this.company = company;
-        this.nmService = nmService;
+        this.name = nmService;
         this.description = dsService;
         this.price = prcService;
         this.averageTime = averageTi;
@@ -82,12 +82,12 @@ public class Service implements Serializable {
         this.company = company;
     }
 
-    public String getNmService() {
-        return nmService;
+    public String getName() {
+        return name;
     }
 
-    public void setNmService(String nmService) {
-        this.nmService = nmService;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
