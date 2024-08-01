@@ -1,6 +1,8 @@
 package com.technosdev.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,24 +15,27 @@ public class Service implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codService")
+    @Column(name = "cod_service")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cod_company")
     private Company company;
 
-    @Column(nullable = false, length = 100 , name = "nmService")
+    @NotBlank(message = "O campo nome é obrigatório")
+    @Column(nullable = false, length = 100 , name = "nm_service")
     private String name;
 
-    @Column(nullable = false, length = 200 , name = "dsService")
+    @Column(nullable = false, length = 200 , name = "ds_service")
     private String description;
 
-    @Column(nullable = false , name = "prcService")
+    @NotNull(message = "O campo preço é obrigatório")
+    @Column(nullable = false , name = "prc_service")
     private Double price;
 
-    @Column(updatable = false , name = "averageTi")
-    private Date averageTime;
+    @NotBlank(message = "O campo tempo médio do serviço é obrigatório")
+    @Column(updatable = false , name = "average_time")
+    private int averageTime;
 
     @Column(nullable = false)
     private boolean active;
@@ -47,7 +52,7 @@ public class Service implements Serializable {
     public Service() {
     }
 
-    public Service(Long codService, Long codCompany, Company company, String nmService, String dsService, Double prcService, Date averageTi, boolean active, Date createdAt) {
+    public Service(Long codService, Long codCompany, Company company, String nmService, String dsService, Double prcService, int averageTi, boolean active, Date createdAt) {
         this.id = codService;
         this.company = company;
         this.name = nmService;
@@ -98,11 +103,11 @@ public class Service implements Serializable {
         this.description = description;
     }
 
-    public Date getAverageTime() {
+    public int getAverageTime() {
         return averageTime;
     }
 
-    public void setAverageTime(Date averageTime) {
+    public void setAverageTime(int averageTime) {
         this.averageTime = averageTime;
     }
 
