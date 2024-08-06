@@ -13,7 +13,7 @@ public class SchedulingStatus implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codSchedulingStatus")
+    @Column(name = "cod_scheduling_status")
     private Long id;
 
     @Column(nullable = false, length = 50 , name = "nmStatus")
