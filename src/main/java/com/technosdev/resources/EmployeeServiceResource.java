@@ -4,8 +4,6 @@ import com.technosdev.entities.EmployeeService;
 import com.technosdev.services.EmployeeServiceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,7 +29,7 @@ public class EmployeeServiceResource {
         return ResponseEntity.ok().body(employeeServices);
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<EmployeeService> insert(@Valid @RequestBody EmployeeService employeeService){
         employeeService = employeeServiceService.insert(employeeService);
 
@@ -46,6 +44,12 @@ public class EmployeeServiceResource {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         employeeServiceService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<EmployeeService> update(@Valid @PathVariable Long id, @Valid @RequestBody EmployeeService employeeService) {
+        employeeService = employeeServiceService.update(id, employeeService);
+        return ResponseEntity.ok().body(employeeService);
     }
 
 }

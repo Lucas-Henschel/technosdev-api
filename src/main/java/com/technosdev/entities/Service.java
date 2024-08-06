@@ -33,7 +33,7 @@ public class Service implements Serializable {
     @Column(nullable = false , name = "prc_service")
     private Double price;
 
-    @NotBlank(message = "O campo tempo médio do serviço é obrigatório")
+    @NotNull(message = "O campo tempo médio do serviço é obrigatório")
     @Column(updatable = false , name = "average_time")
     private int averageTime;
 
